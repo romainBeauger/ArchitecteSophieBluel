@@ -1,12 +1,27 @@
 //#region API URL RENDER OU LOCALHOST
 
-// const API_URL = window.location.hostname.includes('github.io')
-//   ? "https://portfolio-architecte-sophie-bluel-h7hp.onrender.com"
-//   : "http://localhost:5678";
+const API_URL = "http://localhost:5678";
 
-const API_URL = window.location.hostname.includes('github.io')
-  ? "https://portfolio-architecte-sophie-bluel-h7hp.onrender.com"
-  : "http://localhost:5678";
+const IS_GITHUB_PAGES = window.location.hostname.includes('github.io');
+
+//#endregion
+
+
+//#region Données statiques (utilisées sur GitHub Pages)
+
+const STATIC_WORKS = [
+  { id: 1, title: "Abajour Tahina", imageUrl: "./FrontEnd/assets/images/abajour-tahina.png", categoryId: 1, category: { id: 1, name: "Objets" } },
+  { id: 2, title: "Appartement Paris V", imageUrl: "./FrontEnd/assets/images/appartement-paris-v.png", categoryId: 2, category: { id: 2, name: "Appartements" } },
+  { id: 3, title: "Restaurant Sushisen - Londres", imageUrl: "./FrontEnd/assets/images/restaurant-sushisen-londres.png", categoryId: 3, category: { id: 3, name: "Hotels & restaurants" } },
+  { id: 4, title: "Villa \"La Balisiere\" - Port Louis", imageUrl: "./FrontEnd/assets/images/la-balisiere.png", categoryId: 2, category: { id: 2, name: "Appartements" } },
+  { id: 5, title: "Structures Thermopolis", imageUrl: "./FrontEnd/assets/images/structures-thermopolis.png", categoryId: 1, category: { id: 1, name: "Objets" } },
+  { id: 6, title: "Appartement Paris X", imageUrl: "./FrontEnd/assets/images/appartement-paris-x.png", categoryId: 2, category: { id: 2, name: "Appartements" } },
+  { id: 7, title: "Pavillon \"Le coteau\" - Cassis", imageUrl: "./FrontEnd/assets/images/le-coteau-cassis.png", categoryId: 2, category: { id: 2, name: "Appartements" } },
+  { id: 8, title: "Villa Ferneze - Isola d'Elba", imageUrl: "./FrontEnd/assets/images/villa-ferneze.png", categoryId: 2, category: { id: 2, name: "Appartements" } },
+  { id: 9, title: "Appartement Paris XVIII", imageUrl: "./FrontEnd/assets/images/appartement-paris-xviii.png", categoryId: 2, category: { id: 2, name: "Appartements" } },
+  { id: 10, title: "Bar \"Lullaby\" - Paris", imageUrl: "./FrontEnd/assets/images/bar-lullaby-paris.png", categoryId: 3, category: { id: 3, name: "Hotels & restaurants" } },
+  { id: 11, title: "Hotel First Arte - New Delhi", imageUrl: "./FrontEnd/assets/images/hotel-first-arte-new-delhi.png", categoryId: 3, category: { id: 3, name: "Hotels & restaurants" } },
+];
 
 //#endregion
 
@@ -63,6 +78,7 @@ async function recupererTravaux(categoryId = null) {
 }
 
 async function fetchWorks() {
+    if (IS_GITHUB_PAGES) return STATIC_WORKS;
     const requete = await fetch(`${API_URL}/api/works`);
     return await requete.json();
 }
